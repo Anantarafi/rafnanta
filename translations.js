@@ -120,6 +120,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    const translations = {
+    id: {
+        // ... kunci lainnya
+        'hero-description': 'Saya adalah desainer visual yang menjembatani...',
+        'about-description': 'Sebagai lulusan Teknik Informatika dengan pengalaman...',
+        // ...
+    },
+    en: {
+        // ... kunci lainnya
+        'hero-description': 'I am a visual designer bridging the gap...',
+        'about-description': 'As an Informatics Engineering graduate with hands-on...',
+        // ...
+    }
+};
+
     // Pasang aksi klik ke tombol Toggle
     const langBtn = document.getElementById('language-toggle');
     if (langBtn) {
