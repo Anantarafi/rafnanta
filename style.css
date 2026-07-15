@@ -1,0 +1,50 @@
+/* Custom Reset & Base Fonts Configuration */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #EFECE6;
+}
+
+/* Overriding All Headings to use Space Grotesk */
+h1, h2, h3, h4, h5, h6, .font-heading {
+    font-family: 'Space Grotesk', sans-serif !important;
+}
+
+/* Standardizing Body & Interactive Elements to IBM Plex Mono */
+p, a, button, input, textarea, span, label, .font-body {
+    font-family: 'IBM Plex Mono', monospace !important;
+}
+
+/* Custom Scrollbar Brutalist Style */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #EFECE6;
+    border-left: 3px solid #000000;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #FFDB58;
+    border: 2px solid #000000;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #C4A1FF;
+}
+
+/* Back to Top Custom Visibility State */
+#back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}

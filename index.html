@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-translate="page-title">Portofolio - Irsyada Rafi Ananta</title>
+    <meta name="description" data-translate="meta-description" content="Portfolio Irsyada Rafi Ananta - Graphic Design & UI/UX Designer dengan pengalaman dalam pengembangan web dan desain digital" />
+    
+    <!-- Modal Project Neo-Brutalisme -->
+<div id="project-modal" class="fixed inset-0 z-[10000] hidden items-center justify-center px-4">
+    <div class="modal-backdrop absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+    <div class="modal-content relative z-10 w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-[#EFECE6] border-[3px] border-black rounded-2xl shadow-[12px_12px_0px_0px_#000] flex flex-col">
+        <!-- Header -->
+        <div class="border-b-[3px] border-black p-4 md:p-6 flex justify-between items-center bg-white sticky top-0 z-20">
+            <h3 id="modal-title" class="font-heading font-black text-2xl uppercase tracking-tighter"></h3>
+            <button id="modal-close" class="border-2 border-black bg-[#FF7A5C] w-10 h-10 flex items-center justify-center hover:bg-[#FFDB58] shadow-[3px_3px_0px_0px_#000] active:translate-x-1 active:translate-y-1 active:shadow-none transition-all">
+                <i class="fas fa-times text-black"></i>
+            </button>
+        </div>
+        <!-- Body -->
+        <div class="p-6 grid md:grid-cols-2 gap-8 bg-[#EFECE6]">
+            <!-- Kontainer Gambar: Dibuat Flexbox Center dengan Batas Tinggi Maksimal -->
+            <div class="border-[3px] border-black rounded-xl bg-white shadow-[6px_6px_0px_0px_#000] flex items-center justify-center p-4 min-h-[250px] md:min-h-[380px] max-h-[450px]">
+                <!-- Menggunakan object-contain dan max-h-full agar gambar menyusut proporsional -->
+                <img id="modal-image" class="max-w-full max-h-full object-contain rounded-lg shadow-sm" src="" alt="" />
+            </div>
+            
+            <!-- Detail Informasi Kanan -->
+            <div class="space-y-6 flex flex-col justify-between">
+                <div class="space-y-4">
+                    <div>
+                        <h4 class="font-bold border-b-[3px] border-black pb-2 mb-3 uppercase text-sm" data-translate="project-description-title">Deskripsi Proyek</h4>
+                        <p id="modal-description" class="text-sm font-medium leading-relaxed text-zinc-800"></p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold border-b-[3px] border-black pb-2 mb-3 uppercase text-sm" data-translate="project-technologies">Teknologi</h4>
+                        <div id="modal-tech" class="flex flex-wrap gap-2"></div>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold border-b-[3px] border-black pb-2 mb-3 uppercase text-sm" data-translate="project-category">Kategori</h4>
+                    <span id="modal-category" class="border-2 border-black bg-[#C4A1FF] font-bold text-xs px-3 py-1 shadow-[2px_2px_0px_0px_#000] uppercase inline-block"></span>
+                </div>
+            </div>
+        </div>
+        <!-- Footer -->
+        <div class="border-t-[3px] border-black p-4 md:p-6 bg-white flex justify-end gap-4 sticky bottom-0">
+            <button id="view-project" class="border-2 border-black bg-[#BAFCA2] px-4 py-2 font-bold uppercase shadow-[4px_4px_0px_0px_#000] hover:translate-x-0.5 hover:translate-y-0.5 active:translate-x-1 active:translate-y-1 active:shadow-none transition-all text-xs">Lihat Project</button>
+            <button id="close-modal" class="border-2 border-black bg-white px-4 py-2 font-bold uppercase shadow-[4px_4px_0px_0px_#000] hover:translate-x-0.5 hover:translate-y-0.5 active:translate-x-1 active:translate-y-1 active:shadow-none transition-all text-xs">Tutup</button>
+        </div>
+    </div>
+</div>
+
+<!-- Marquee Tape (Anti-Generic Neo-Brutalism Element) -->
+        <div class="bg-[#BAFCA2] border-b-[3px] border-black py-3 overflow-hidden flex whitespace-nowrap shadow-[0px_4px_0px_0px_rgba(0,0,0,1)] relative z-20 font-bold uppercase tracking-widest text-sm">
+            <div class="animate-[marquee_20s_linear_infinite] flex items-center gap-8">
+                <span>✦ AVAILABLE FOR WORK</span>
+                <span>✦ UI/UX DESIGNER</span>
+                <span>✦ GRAPHIC DESIGN</span>
+                <span>✦ OPEN FOR COLLABORATION</span>
+                <span>✦ UI/UX DESIGNER</span>
+                <span>✦ FULLSTACK DEVELOPER</span>
+                <span>✦ GRAPHIC DESIGN</span>
+                <span>✦ OPEN FOR COLLABORATION</span>
+            </div>
+        </div>
+
+
+    <!-- Google Fonts: Space Grotesk (Headings) & IBM Plex Mono (Body/Buttons) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Space+Grotesk:wght@700;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons & Custom Style Sheet Base -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    
+    <!-- Tailwind CSS Script CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        heading: ['Space Grotesk', 'sans-serif'],
+                        body: ['IBM Plex Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-[#EFECE6] text-black font-body antialiased selection:bg-[#FFDB58] selection:text-black p-4 md:p-6">
+
+    <!-- Kontainer Luar Utama (Frame seperti referensi Olivia) -->
+    <div class="max-w-[1400px] mx-auto border-[3px] border-black rounded-[32px] bg-[#EFECE6] overflow-hidden shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] relative z-10">
+        
+        <!-- Navbar -->
+        <nav class="border-b-[3px] border-black bg-[#EFECE6] sticky top-0 z-50">
+            <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+                <div class="font-heading font-black text-2xl tracking-tighter uppercase border-2 border-black bg-white px-3 py-1 shadow-[3px_3px_0px_0px_#000]">
+                    Portfolio.
+                </div>
+                <div class="hidden md:flex items-center gap-8 font-semibold uppercase text-sm" id="nav-menu">
+                    <a href="#home" class="hover:text-[#FFA07A] transition-colors" data-translate="nav-home">Beranda</a>
+                    <a href="#about" class="hover:text-[#BAFCA2] transition-colors" data-translate="nav-about">Tentang</a>
+                    <a href="#skills" class="hover:text-[#C4A1FF] transition-colors" data-translate="nav-skills">Keahlian</a>
+                    <a href="#projects" class="hover:text-[#FFDB58] transition-colors" data-translate="nav-projects">Proyek</a>
+                    <a href="#contact" class="hover:text-[#FF7A5C] transition-colors" data-translate="nav-contact">Kontak</a>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button id="language-toggle" class="border-2 border-black bg-white px-4 py-2 font-bold uppercase shadow-[4px_4px_0px_0px_#000] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0px_0px_#000] active:translate-x-1 active:translate-y-1 active:shadow-none transition-all flex items-center gap-2 text-sm">
+                        <span>🇮🇩</span><span>ID</span>
+                    </button>
+                    <div class="md:hidden cursor-pointer flex flex-col gap-1 border-2 border-black p-2 bg-white shadow-[3px_3px_0px_0px_#000]" id="nav-toggle">
+                        <span class="w-6 h-0.5 bg-black"></span>
+                        <span class="w-6 h-0.5 bg-black"></span>
+                        <span class="w-6 h-0.5 bg-black"></span>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section id="home" class="py-16 md:py-28 px-6 border-b-[3px] border-black bg-[#EFECE6]">
+            <div class="max-w-7xl mx-auto grid md:grid-columns grid-cols-1 md:grid-cols-12 gap-12 items-center">
+                <div class="md:col-span-7 space-y-6">
+                    <h1 class="font-heading font-black text-5xl md:text-7xl tracking-tighter text-black leading-none uppercase">
+                        <span class="block text-3xl md:text-4xl normal-case font-body font-normal tracking-normal mb-2" data-translate="hero-greeting">Halo, Saya</span>
+                        <span class="bg-[#C4A1FF] border-2 border-black px-4 py-1 shadow-[6px_6px_0px_0px_#000] inline-block my-2">Irsyada Rafi</span> 
+                        <span class="block mt-2">Ananta</span>
+                    </h1>
+                    <p class="text-lg md:text-xl font-bold uppercase bg-[#BAFCA2] inline-block border-2 border-black px-3 py-1 shadow-[4px_4px_0px_0px_#000]" data-translate="hero-role">Graphic Design & UI/UX Designer</p>
+                    <p class="text-base max-w-xl text-zinc-700 leading-relaxed font-medium" data-translate="hero-description">
+                        Saya menciptakan pengalaman digital yang menakjubkan dengan desain yang menarik.
+                    </p>
+                    <div class="flex flex-wrap gap-4 pt-2">
+                        <a href="#projects" class="border-[3px] border-black bg-[#FFDB58] text-black font-bold uppercase px-6 py-3 rounded-xl shadow-[5px_5px_0px_0px_#000] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[3px_3px_0px_0px_#000] active:translate-x-1.2 active:translate-y-1.2 active:shadow-none transition-all" data-translate="btn-view-projects">Lihat Proyek</a>
+                        <a href="#contact" class="border-[3px] border-black bg-white text-black font-bold uppercase px-6 py-3 rounded-xl shadow-[5px_5px_0px_0px_#000] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[3px_3px_0px_0px_#000] active:translate-x-1.2 active:translate-y-1.2 active:shadow-none transition-all" data-translate="btn-contact-me">Hubungi Saya</a>
+                    </div>
+                </div>
+                <!-- Profile Image Component dengan Efek Tumpuk Layering Khas Olivia -->
+                <div class="md:col-span-5 flex justify-center">
+                    <div class="relative w-72 h-72 md:w-80 md:h-80">
+                        <div class="absolute inset-0 border-[3px] border-black bg-[#C4A1FF] rounded-[32px] translate-x-4 translate-y-4"></div>
+                        <div class="absolute inset-0 border-[3px] border-black bg-white rounded-[32px] overflow-hidden">
+                            <img src="image/myfoto.jpg" alt="Irsyada Rafi Ananta" class="w-full h-full object-cover grayscale contract-125" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-16 px-6 border-b-[3px] border-black bg-white">
+            <div class="max-w-4xl mx-auto text-center space-y-6">
+                <h2 class="font-heading font-black text-4xl md:text-5xl uppercase tracking-tighter" data-translate="about-title">Tentang Saya</h2>
+                <div class="border-[3px] border-black rounded-2xl bg-[#FFA07A] p-6 md:p-8 shadow-[6px_6px_0px_0px_#000] text-left">
+                    <p class="text-base md:text-lg text-black font-medium leading-relaxed" data-translate="about-description">
+                        Fresh graduate D3 Teknik Informatika dengan pengalaman magang sebagai Fullstack Developer.
+                        Terampil dalam pengembangan aplikasi web end-to-end menggunakan PHP, CodeIgniter, dan JavaScript.
+                        Memiliki semangat tinggi dalam merancang antarmuka (UI/UX) yang intuitif dan fungsional menggunakan
+                        Figma untuk memberikan pengalaman pengguna terbaik.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-16 px-6 border-b-[3px] border-black bg-[#EFECE6]">
+            <div class="max-w-6xl mx-auto space-y-10">
+                <h2 class="font-heading font-black text-4xl md:text-5xl uppercase tracking-tighter text-center" data-translate="skills-title">Keahlian</h2>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+                    <!-- Card Skill dengan Style Neo-Brutalisme Berwarna Pastel Solid -->
+                    <div class="border-[3px] border-black rounded-xl p-6 text-center bg-white shadow-[5px_5px_0px_0px_#000] hover:bg-[#BAFCA2] hover:-translate-y-1 transition-all"><i class="fab fa-php text-5xl mb-3"></i><h3 class="font-bold text-sm uppercase">PHP</h3></div>
+                    <div class="border-[3px] border-black rounded-xl p-6 text-center bg-white shadow-[5px_5px_0px_0px_#000] hover:bg-[#FFDB58] hover:-translate-y-1 transition-all"><img src="image/codeigniter-logo-png-transparent.png" class="w-12 h-12 mx-auto mb-3 object-contain" alt="CodeIgniter"/><h3 class="font-bold text-sm uppercase">CodeIgniter</h3></div>
+                    <div class="border-[3px] border-black rounded-xl p-6 text-center bg-white shadow-[5px_5px_0px_0px_#000] hover:bg-[#C4A1FF] hover:-translate-y-1 transition-all"><i class="fab fa-js-square text-5xl mb-3"></i><h3 class="font-bold text-sm uppercase">Javascript</h3></div>
+                    <div class="border-[3px] border-black rounded-xl p-6 text-center bg-white shadow-[5px_5px_0px_0px_#000] hover:bg-[#FFA07A] hover:-translate-y-1 transition-all"><i class="fab fa-figma text-5xl mb-3"></i><h3 class="font-bold text-sm uppercase">Figma</h3></div>
+                    <div class="border-[3px] border-black rounded-xl p-6 text-center bg-white shadow-[5px_5px_0px_0px_#000] hover:bg-[#E3DFF2] hover:-translate-y-1 transition-all"><img src="image/sotosop.png" class="w-12 h-12 mx-auto mb-3 object-contain" alt="Photoshop"/><h3 class="font-bold text-sm uppercase">Photoshop</h3></div>
+                    <div class="border-[3px] border-black rounded-xl p-6 text-center bg-white shadow-[5px_5px_0px_0px_#000] hover:bg-[#DAF5F0] hover:-translate-y-1 transition-all"><img src="image/premiere.png" class="w-12 h-12 mx-auto mb-3 object-contain" alt="Premiere"/><h3 class="font-bold text-sm uppercase">Premiere</h3></div>
+                    <div class="border-[3px] border-black rounded-xl p-6 text-center bg-white shadow-[5px_5px_0px_0px_#000] hover:bg-[#87CEEB] hover:-translate-y-1 transition-all"><i class="fas fa-database text-5xl mb-3"></i><h3 class="font-bold text-sm uppercase">MySQL</h3></div>
+                    <div class="border-[3px] border-black rounded-xl p-6 text-center bg-white shadow-[5px_5px_0px_0px_#000] hover:bg-[#FCDFFF] hover:-translate-y-1 transition-all"><img src="image/corel.png" class="w-12 h-12 mx-auto mb-3 object-contain" alt="CorelDRAW"/><h3 class="font-bold text-sm uppercase">CorelDRAW</h3></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-16 px-6 border-b-[3px] border-black bg-white">
+            <div class="max-w-7xl mx-auto space-y-8">
+                <h2 class="font-heading font-black text-4xl md:text-5xl uppercase tracking-tighter text-center" data-translate="projects-title">Proyek Saya</h2>
+
+                <!-- Filter Buttons Style Brutalist -->
+                <div class="flex flex-wrap justify-center gap-3">
+                    <button class="border-2 border-black bg-[#FFDB58] font-bold uppercase px-4 py-2 text-xs shadow-[3px_3px_0px_0px_#000] transition-all filter-btn active" data-filter="all" data-translate="filter-all">Semua</button>
+                    <button class="border-2 border-black bg-white font-bold uppercase px-4 py-2 text-xs shadow-[3px_3px_0px_0px_#000] transition-all filter-btn" data-filter="ui-ux" data-translate="filter-ui-ux">UI/UX</button>
+                    <button class="border-2 border-black bg-white font-bold uppercase px-4 py-2 text-xs shadow-[3px_3px_0px_0px_#000] transition-all filter-btn" data-filter="web" data-translate="filter-web">Website</button>
+                    <button class="border-2 border-black bg-white font-bold uppercase px-4 py-2 text-xs shadow-[3px_3px_0px_0px_#000] transition-all filter-btn" data-filter="design" data-translate="filter-design">Desain</button>
+                </div>
+
+                <!-- Input Search Brutalist -->
+                <div class="relative max-w-md mx-auto">
+                    <input type="text" id="project-search" class="w-full border-[3px] border-black px-4 py-3 pl-10 rounded-xl bg-[#EFECE6] font-semibold text-black focus:outline-none focus:bg-white shadow-[4px_4px_0px_0px_#000] transition-all" data-translate="search-placeholder" placeholder="Cari proyek..." />
+                    <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-black"></i>
+                </div>
+
+                <!-- Gallery Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-gallery">
+
+                <!-- 1. Desain Social Media -->
+                <div class="border-[3px] border-black rounded-2xl bg-white overflow-hidden flex flex-col h-full project-card transition-all duration-200 ease-in-out shadow-[6px_6px_0px_0px_#000] hover:-translate-x-1.5 hover:-translate-y-1.5 hover:shadow-[12px_12px_0px_0px_#000]" data-category="design" data-link="https://www.canva.com/design/DAG1fL6i_7g/...">
+                    <div class="h-48 border-b-[3px] border-black overflow-hidden bg-zinc-100">
+                        <img src="image/ads food.png" alt="Desain Social Media" class="w-full h-full object-cover transition-transform hover:scale-105 duration-300" />
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow space-y-3">
+                        <h3 class="font-heading font-black text-xl uppercase tracking-tight" data-translate="project-canva1-title">Desain Social Media</h3>
+                        <p class="text-xs text-zinc-700 leading-relaxed flex-grow font-medium" data-translate="project-canva1-desc">Desain konten iklan makanan untuk media sosial dengan tipografi tegas dan layout responsif.</p>
+                        <div class="flex flex-wrap gap-2 pt-2">
+                            <span class="border border-black bg-[#FFA07A] text-[10px] font-bold uppercase px-2 py-0.5 shadow-[2px_2px_0px_0px_#000]" data-translate="tech-canva">Canva</span>
+                        </div>
+                        <button type="button" class="project-btn w-full block text-center border-2 border-black bg-white font-bold uppercase py-2 text-xs shadow-[3px_3px_0px_0px_#000] hover:bg-[#BAFCA2] active:translate-x-1 active:translate-y-1 active:shadow-none transition-all" data-translate="btn-view-details">Lihat Detail</button>
+                    </div>
+                </div>
+
+                <!-- 2. Desain Logo -->
+                <div class="border-[3px] border-black rounded-2xl bg-white overflow-hidden flex flex-col h-full project-card transition-all duration-200 ease-in-out shadow-[6px_6px_0px_0px_#000] hover:-translate-x-1.5 hover:-translate-y-1.5 hover:shadow-[12px_12px_0px_0px_#000]" data-category="design" data-link="#">
+                    <div class="h-48 border-b-[3px] border-black overflow-hidden bg-zinc-100">
+                        <img src="image/nomadfly logo.png" alt="Desain Logo" class="w-full h-full object-cover transition-transform hover:scale-105 duration-300" />
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow space-y-3">
+                        <h3 class="font-heading font-black text-xl uppercase tracking-tight" data-translate="project-canva2-title">Desain Logo</h3>
+                        <p class="text-xs text-zinc-700 leading-relaxed flex-grow font-medium" data-translate="project-canva2-desc">Perancangan logo sederhana yang mudah diingat dengan fokus pada bentuk dan keterbacaan di berbagai ukuran.</p>
+                        <div class="flex flex-wrap gap-2 pt-2">
+                            <span class="border border-black bg-[#FFA07A] text-[10px] font-bold uppercase px-2 py-0.5 shadow-[2px_2px_0px_0px_#000]" data-translate="tech-canva">Canva</span>
+                        </div>
+                        <button type="button" class="project-btn w-full block text-center border-2 border-black bg-white font-bold uppercase py-2 text-xs shadow-[3px_3px_0px_0px_#000] hover:bg-[#BAFCA2] active:translate-x-1 active:translate-y-1 active:shadow-none transition-all" data-translate="btn-view-details">Lihat Detail</button>
+                    </div>
+                </div>
+
+                <!-- 3. Desain PPT -->
+                <div class="border-[3px] border-black rounded-2xl bg-white overflow-hidden flex flex-col h-full project-card transition-all duration-200 ease-in-out shadow-[6px_6px_0px_0px_#000] hover:-translate-x-1.5 hover:-translate-y-1.5 hover:shadow-[12px_12px_0px_0px_#000]" data-category="design" data-link="#">
+                    <div class="h-48 border-b-[3px] border-black overflow-hidden bg-zinc-100">
+                        <img src="image/minimalist company profile.png" alt="Desain PPT" class="w-full h-full object-cover transition-transform hover:scale-105 duration-300" />
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow space-y-3">
+                        <h3 class="font-heading font-black text-xl uppercase tracking-tight" data-translate="project-canva3-title">Desain PPT</h3>
+                        <p class="text-xs text-zinc-700 leading-relaxed flex-grow font-medium" data-translate="project-canva3-desc">Template presentasi bergaya minimalis dengan hierarki visual jelas untuk penyampaian materi yang rapi.</p>
+                        <div class="flex flex-wrap gap-2 pt-2">
+                            <span class="border border-black bg-[#FFA07A] text-[10px] font-bold uppercase px-2 py-0.5 shadow-[2px_2px_0px_0px_#000]" data-translate="tech-canva">Canva</span>
+                        </div>
+                        <button type="button" class="project-btn w-full block text-center border-2 border-black bg-white font-bold uppercase py-2 text-xs shadow-[3px_3px_0px_0px_#000] hover:bg-[#BAFCA2] active:translate-x-1 active:translate-y-1 active:shadow-none transition-all" data-translate="btn-view-details">Lihat Detail</button>
+                    </div>
+                </div>
+
+                <!-- 4. Travel Website -->
+                <div class="border-[3px] border-black rounded-2xl bg-white overflow-hidden flex flex-col h-full project-card transition-all duration-200 ease-in-out shadow-[6px_6px_0px_0px_#000] hover:-translate-x-1.5 hover:-translate-y-1.5 hover:shadow-[12px_12px_0px_0px_#000]" data-category="design" data-link="#">
+                    <div class="h-48 border-b-[3px] border-black overflow-hidden bg-zinc-100">
+                        <img src="image/travel website.png" alt="Travel Website" class="w-full h-full object-cover transition-transform hover:scale-105 duration-300" />
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow space-y-3">
+                        <h3 class="font-heading font-black text-xl uppercase tracking-tight" data-translate="project-canva4-title">Travel Website</h3>
+                        <p class="text-xs text-zinc-700 leading-relaxed flex-grow font-medium" data-translate="project-canva4-desc">Rancangan visual halaman muka situs travel dengan hero kuat dan call-to-action yang menonjol.</p>
+                        <div class="flex flex-wrap gap-2 pt-2">
+                            <span class="border border-black bg-[#FFA07A] text-[10px] font-bold uppercase px-2 py-0.5 shadow-[2px_2px_0px_0px_#000]" data-translate="tech-canva">Canva</span>
+                        </div>
+                        <button type="button" class="project-btn w-full block text-center border-2 border-black bg-white font-bold uppercase py-2 text-xs shadow-[3px_3px_0px_0px_#000] hover:bg-[#BAFCA2] active:translate-x-1 active:translate-y-1 active:shadow-none transition-all" data-translate="btn-view-details">Lihat Detail</button>
+                    </div>
+                </div>
+
+                <!-- 5. Streetwear Design -->
+                <div class="border-[3px] border-black rounded-2xl bg-white overflow-hidden flex flex-col h-full project-card transition-all duration-200 ease-in-out shadow-[6px_6px_0px_0px_#000] hover:-translate-x-1.5 hover:-translate-y-1.5 hover:shadow-[12px_12px_0px_0px_#000]" data-category="design" data-link="#">
+                    <div class="h-48 border-b-[3px] border-black overflow-hidden bg-zinc-100">
+                        <img src="image/streetwear anime.png" alt="Streetwear Design" class="w-full h-full object-cover transition-transform hover:scale-105 duration-300" />
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow space-y-3">
+                        <h3 class="font-heading font-black text-xl uppercase tracking-tight" data-translate="project-canva5-title">Streetwear Design</h3>
+                        <p class="text-xs text-zinc-700 leading-relaxed flex-grow font-medium" data-translate="project-canva5-desc">Mockup grafis streetwear bertema anime dengan komposisi kontras dan penekanan pada identitas brand.</p>
+                        <div class="flex flex-wrap gap-2 pt-2">
+                            <span class="border border-black bg-[#FFA07A] text-[10px] font-bold uppercase px-2 py-0.5 shadow-[2px_2px_0px_0px_#000]" data-translate="tech-canva">Canva</span>
+                        </div>
+                        <button type="button" class="project-btn w-full block text-center border-2 border-black bg-white font-bold uppercase py-2 text-xs shadow-[3px_3px_0px_0px_#000] hover:bg-[#BAFCA2] active:translate-x-1 active:translate-y-1 active:shadow-none transition-all" data-translate="btn-view-details">Lihat Detail</button>
+                    </div>
+                </div>
+
+                <!-- 6. Desain Proposal -->
+                <div class="border-[3px] border-black rounded-2xl bg-white overflow-hidden flex flex-col h-full project-card transition-all duration-200 ease-in-out shadow-[6px_6px_0px_0px_#000] hover:-translate-x-1.5 hover:-translate-y-1.5 hover:shadow-[12px_12px_0px_0px_#000]" data-category="design" data-link="#">
+                    <div class="h-48 border-b-[3px] border-black overflow-hidden bg-zinc-100">
+                        <img src="image/project proposal.png" alt="Desain Proposal" class="w-full h-full object-cover transition-transform hover:scale-105 duration-300" />
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow space-y-3">
+                        <h3 class="font-heading font-black text-xl uppercase tracking-tight" data-translate="project-canva6-title">Desain Proposal</h3>
+                        <p class="text-xs text-zinc-700 leading-relaxed flex-grow font-medium" data-translate="project-canva6-desc">Template proposal perusahaan yang konsisten secara visual, siap cetak dan presentasi.</p>
+                        <div class="flex flex-wrap gap-2 pt-2">
+                            <span class="border border-black bg-[#FFA07A] text-[10px] font-bold uppercase px-2 py-0.5 shadow-[2px_2px_0px_0px_#000]" data-translate="tech-canva">Canva</span>
+                        </div>
+                        <button type="button" class="project-btn w-full block text-center border-2 border-black bg-white font-bold uppercase py-2 text-xs shadow-[3px_3px_0px_0px_#000] hover:bg-[#BAFCA2] active:translate-x-1 active:translate-y-1 active:shadow-none transition-all" data-translate="btn-view-details">Lihat Detail</button>
+                    </div>
+                </div>
+
+                <!-- 7. UI/UX Kerajinan -->
+                <div class="border-[3px] border-black rounded-2xl bg-white overflow-hidden flex flex-col h-full project-card transition-all duration-200 ease-in-out shadow-[6px_6px_0px_0px_#000] hover:-translate-x-1.5 hover:-translate-y-1.5 hover:shadow-[12px_12px_0px_0px_#000]" data-category="ui-ux" data-link="#">
+                    <div class="h-48 border-b-[3px] border-black overflow-hidden bg-zinc-100">
+                        <img src="image/uix kerajinan tradisional.png" alt="UI/UX Kerajinan" class="w-full h-full object-cover transition-transform hover:scale-105 duration-300" />
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow space-y-3">
+                        <h3 class="font-heading font-black text-xl uppercase tracking-tight" data-translate="project-craft-title">UI/UX Kerajinan</h3>
+                        <p class="text-xs text-zinc-700 leading-relaxed flex-grow font-medium" data-translate="project-craft-desc">Desain antarmuka aplikasi untuk promosi kerajinan tradisional dengan fokus pada user experience.</p>
+                        <div class="flex flex-wrap gap-2 pt-2">
+                            <span class="border border-black bg-[#C4A1FF] text-[10px] font-bold uppercase px-2 py-0.5 shadow-[2px_2px_0px_0px_#000]" data-translate="tech-figma">Figma</span>
+                        </div>
+                        <button type="button" class="project-btn w-full block text-center border-2 border-black bg-white font-bold uppercase py-2 text-xs shadow-[3px_3px_0px_0px_#000] hover:bg-[#BAFCA2] active:translate-x-1 active:translate-y-1 active:shadow-none transition-all" data-translate="btn-view-details">Lihat Detail</button>
+                    </div>
+                </div>
+
+                <!-- 8. UI/UX Makanan -->
+                <div class="border-[3px] border-black rounded-2xl bg-white overflow-hidden flex flex-col h-full project-card transition-all duration-200 ease-in-out shadow-[6px_6px_0px_0px_#000] hover:-translate-x-1.5 hover:-translate-y-1.5 hover:shadow-[12px_12px_0px_0px_#000]" data-category="ui-ux" data-link="#">
+                    <div class="h-48 border-b-[3px] border-black overflow-hidden bg-zinc-100">
+                        <img src="image/uix makanan.png" alt="UI/UX Makanan" class="w-full h-full object-cover transition-transform hover:scale-105 duration-300" />
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow space-y-3">
+                        <h3 class="font-heading font-black text-xl uppercase tracking-tight" data-translate="project-food-title">UI/UX Pesan Makanan</h3>
+                        <p class="text-xs text-zinc-700 leading-relaxed flex-grow font-medium" data-translate="project-food-desc">Aplikasi pemesanan makanan dengan antarmuka yang user-friendly dan navigasi intuitif.</p>
+                        <div class="flex flex-wrap gap-2 pt-2">
+                            <span class="border border-black bg-[#C4A1FF] text-[10px] font-bold uppercase px-2 py-0.5 shadow-[2px_2px_0px_0px_#000]" data-translate="tech-figma">Figma</span>
+                        </div>
+                        <button type="button" class="project-btn w-full block text-center border-2 border-black bg-white font-bold uppercase py-2 text-xs shadow-[3px_3px_0px_0px_#000] hover:bg-[#BAFCA2] active:translate-x-1 active:translate-y-1 active:shadow-none transition-all" data-translate="btn-view-details">Lihat Detail</button>
+                    </div>
+                </div>
+
+                <!-- 9. UI/UX Website Mobil -->
+                <div class="border-[3px] border-black rounded-2xl bg-white overflow-hidden flex flex-col h-full project-card transition-all duration-200 ease-in-out shadow-[6px_6px_0px_0px_#000] hover:-translate-x-1.5 hover:-translate-y-1.5 hover:shadow-[12px_12px_0px_0px_#000]" data-category="ui-ux" data-link="#">
+                    <div class="h-48 border-b-[3px] border-black overflow-hidden bg-zinc-100">
+                        <img src="image/uix website.png" alt="UI/UX Website" class="w-full h-full object-cover transition-transform hover:scale-105 duration-300" />
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow space-y-3">
+                        <h3 class="font-heading font-black text-xl uppercase tracking-tight" data-translate="project-car-title">UI/UX Web Modifikasi</h3>
+                        <p class="text-xs text-zinc-700 leading-relaxed flex-grow font-medium" data-translate="project-car-desc">Website untuk layanan modifikasi mobil dengan galeri showcase yang menarik.</p>
+                        <div class="flex flex-wrap gap-2 pt-2">
+                            <span class="border border-black bg-[#C4A1FF] text-[10px] font-bold uppercase px-2 py-0.5 shadow-[2px_2px_0px_0px_#000]" data-translate="tech-figma">Figma</span>
+                        </div>
+                        <button type="button" class="project-btn w-full block text-center border-2 border-black bg-white font-bold uppercase py-2 text-xs shadow-[3px_3px_0px_0px_#000] hover:bg-[#BAFCA2] active:translate-x-1 active:translate-y-1 active:shadow-none transition-all" data-translate="btn-view-details">Lihat Detail</button>
+                    </div>
+                </div>
+
+                <!-- 10. UI/UX Design -->
+                <div class="border-[3px] border-black rounded-2xl bg-white overflow-hidden flex flex-col h-full project-card transition-all duration-200 ease-in-out shadow-[6px_6px_0px_0px_#000] hover:-translate-x-1.5 hover:-translate-y-1.5 hover:shadow-[12px_12px_0px_0px_#000]" data-category="ui-ux" data-link="#">
+                    <div class="h-48 border-b-[3px] border-black overflow-hidden bg-zinc-100">
+                        <img src="image/ui figma.PNG" alt="UI Design" class="w-full h-full object-cover transition-transform hover:scale-105 duration-300" />
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow space-y-3">
+                        <h3 class="font-heading font-black text-xl uppercase tracking-tight" data-translate="project-ui-title">UI/UX Design</h3>
+                        <p class="text-xs text-zinc-700 leading-relaxed flex-grow font-medium" data-translate="project-ui-desc">Perancangan antarmuka pengguna yang intuitif dengan desain modern dan clean.</p>
+                        <div class="flex flex-wrap gap-2 pt-2">
+                            <span class="border border-black bg-[#C4A1FF] text-[10px] font-bold uppercase px-2 py-0.5 shadow-[2px_2px_0px_0px_#000]" data-translate="tech-figma">Figma</span>
+                        </div>
+                        <button type="button" class="project-btn w-full block text-center border-2 border-black bg-white font-bold uppercase py-2 text-xs shadow-[3px_3px_0px_0px_#000] hover:bg-[#BAFCA2] active:translate-x-1 active:translate-y-1 active:shadow-none transition-all" data-translate="btn-view-details">Lihat Detail</button>
+                    </div>
+                </div>
+
+                <!-- 11. Website Fullstack -->
+                <div class="border-[3px] border-black rounded-2xl bg-white overflow-hidden flex flex-col h-full project-card transition-all duration-200 ease-in-out shadow-[6px_6px_0px_0px_#000] hover:-translate-x-1.5 hover:-translate-y-1.5 hover:shadow-[12px_12px_0px_0px_#000]" data-category="web" data-link="https://github.com/Anantarafi">
+                    <div class="h-48 border-b-[3px] border-black overflow-hidden bg-zinc-100">
+                        <img src="image/web.PNG" alt="Website Fullstack" class="w-full h-full object-cover transition-transform hover:scale-105 duration-300" />
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow space-y-3">
+                        <h3 class="font-heading font-black text-xl uppercase tracking-tight" data-translate="project-web-title">Website Fullstack</h3>
+                        <p class="text-xs text-zinc-700 leading-relaxed flex-grow font-medium" data-translate="project-web-desc">Pengembangan aplikasi web fullstack dengan fitur lengkap dan performa optimal.</p>
+                        <div class="flex flex-wrap gap-2 pt-2">
+                            <span class="border border-black bg-[#FFDB58] text-[10px] font-bold uppercase px-2 py-0.5 shadow-[2px_2px_0px_0px_#000]" data-translate="tech-codeigniter">CodeIgniter</span>
+                            <span class="border border-black bg-[#FFDB58] text-[10px] font-bold uppercase px-2 py-0.5 shadow-[2px_2px_0px_0px_#000]" data-translate="tech-php">PHP</span>
+                            <span class="border border-black bg-[#FFDB58] text-[10px] font-bold uppercase px-2 py-0.5 shadow-[2px_2px_0px_0px_#000]" data-translate="tech-javascript">JavaScript</span>
+                        </div>
+                        <button type="button" class="project-btn w-full block text-center border-2 border-black bg-white font-bold uppercase py-2 text-xs shadow-[3px_3px_0px_0px_#000] hover:bg-[#BAFCA2] active:translate-x-1 active:translate-y-1 active:shadow-none transition-all" data-translate="btn-view-details">Lihat Detail</button>
+                    </div>
+                </div>
+
+                <!-- 12. Banner Hari Santri -->
+                <div class="border-[3px] border-black rounded-2xl bg-white overflow-hidden flex flex-col h-full project-card transition-all duration-200 ease-in-out shadow-[6px_6px_0px_0px_#000] hover:-translate-x-1.5 hover:-translate-y-1.5 hover:shadow-[12px_12px_0px_0px_#000]" data-category="design" data-link="#">
+                    <div class="h-48 border-b-[3px] border-black overflow-hidden bg-zinc-100">
+                        <img src="image/BANNER HARI SANTRI MTS.png" alt="Banner" class="w-full h-full object-cover transition-transform hover:scale-105 duration-300" />
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow space-y-3">
+                        <h3 class="font-heading font-black text-xl uppercase tracking-tight" data-translate="project-banner-title">Banner Hari Santri</h3>
+                        <p class="text-xs text-zinc-700 leading-relaxed flex-grow font-medium" data-translate="project-banner-desc">Desain banner untuk peringatan Hari Santri dengan konsep yang bermakna.</p>
+                        <div class="flex flex-wrap gap-2 pt-2">
+                            <span class="border border-black bg-[#87CEEB] text-[10px] font-bold uppercase px-2 py-0.5 shadow-[2px_2px_0px_0px_#000]" data-translate="tech-photoshop">Adobe Photoshop</span>
+                        </div>
+                        <button type="button" class="project-btn w-full block text-center border-2 border-black bg-white font-bold uppercase py-2 text-xs shadow-[3px_3px_0px_0px_#000] hover:bg-[#BAFCA2] active:translate-x-1 active:translate-y-1 active:shadow-none transition-all" data-translate="btn-view-details">Lihat Detail</button>
+                    </div>
+                </div>
+
+                <!-- 13. Poster Pemain (Ceres) -->
+                <div class="border-[3px] border-black rounded-2xl bg-white overflow-hidden flex flex-col h-full project-card transition-all duration-200 ease-in-out shadow-[6px_6px_0px_0px_#000] hover:-translate-x-1.5 hover:-translate-y-1.5 hover:shadow-[12px_12px_0px_0px_#000]" data-category="design" data-link="#">
+                    <div class="h-48 border-b-[3px] border-black overflow-hidden bg-zinc-100">
+                        <img src="image/ceres.png" alt="Poster Ceres" class="w-full h-full object-cover transition-transform hover:scale-105 duration-300" />
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow space-y-3">
+                        <h3 class="font-heading font-black text-xl uppercase tracking-tight" data-translate="project-poster-ceres-title">Poster Pemain</h3>
+                        <p class="text-xs text-zinc-700 leading-relaxed flex-grow font-medium" data-translate="project-poster-ceres-desc">Desain poster pemain dengan visual menarik dan pesan yang komunikatif.</p>
+                        <div class="flex flex-wrap gap-2 pt-2">
+                            <span class="border border-black bg-[#87CEEB] text-[10px] font-bold uppercase px-2 py-0.5 shadow-[2px_2px_0px_0px_#000]" data-translate="tech-photoshop">Adobe Photoshop</span>
+                        </div>
+                        <button type="button" class="project-btn w-full block text-center border-2 border-black bg-white font-bold uppercase py-2 text-xs shadow-[3px_3px_0px_0px_#000] hover:bg-[#BAFCA2] active:translate-x-1 active:translate-y-1 active:shadow-none transition-all" data-translate="btn-view-details">Lihat Detail</button>
+                    </div>
+                </div>
+
+                <!-- 14. Poster 22B STI -->
+                <div class="border-[3px] border-black rounded-2xl bg-white overflow-hidden flex flex-col h-full project-card transition-all duration-200 ease-in-out shadow-[6px_6px_0px_0px_#000] hover:-translate-x-1.5 hover:-translate-y-1.5 hover:shadow-[12px_12px_0px_0px_#000]" data-category="design" data-link="#">
+                    <div class="h-48 border-b-[3px] border-black overflow-hidden bg-zinc-100">
+                        <img src="image/poster 22b sti.png" alt="Poster 22b STI" class="w-full h-full object-cover transition-transform hover:scale-105 duration-300" />
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow space-y-3">
+                        <h3 class="font-heading font-black text-xl uppercase tracking-tight" data-translate="project-poster-22b-title">Poster 22B STI</h3>
+                        <p class="text-xs text-zinc-700 leading-relaxed flex-grow font-medium" data-translate="project-poster-22b-desc">Poster kelas/komunitas dengan komposisi rapi, fokus pada identitas dan keterbacaan.</p>
+                        <div class="flex flex-wrap gap-2 pt-2">
+                            <span class="border border-black bg-[#87CEEB] text-[10px] font-bold uppercase px-2 py-0.5 shadow-[2px_2px_0px_0px_#000]" data-translate="tech-photoshop">Adobe Photoshop</span>
+                        </div>
+                        <button type="button" class="project-btn w-full block text-center border-2 border-black bg-white font-bold uppercase py-2 text-xs shadow-[3px_3px_0px_0px_#000] hover:bg-[#BAFCA2] active:translate-x-1 active:translate-y-1 active:shadow-none transition-all" data-translate="btn-view-details">Lihat Detail</button>
+                    </div>
+                </div>
+
+                <!-- 15. Poster NSX -->
+                <div class="border-[3px] border-black rounded-2xl bg-white overflow-hidden flex flex-col h-full project-card transition-all duration-200 ease-in-out shadow-[6px_6px_0px_0px_#000] hover:-translate-x-1.5 hover:-translate-y-1.5 hover:shadow-[12px_12px_0px_0px_#000]" data-category="design" data-link="#">
+                    <div class="h-48 border-b-[3px] border-black overflow-hidden bg-zinc-100">
+                        <img src="image/poster nsx.png" alt="Poster NSX" class="w-full h-full object-cover transition-transform hover:scale-105 duration-300" />
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow space-y-3">
+                        <h3 class="font-heading font-black text-xl uppercase tracking-tight" data-translate="project-poster-nsx-title">Poster Promosi (NSX)</h3>
+                        <p class="text-xs text-zinc-700 leading-relaxed flex-grow font-medium" data-translate="project-poster-nsx-desc">Poster promosi bertema otomotif dengan warna kontras dan elemen visual yang dinamis.</p>
+                        <div class="flex flex-wrap gap-2 pt-2">
+                            <span class="border border-black bg-[#FFA07A] text-[10px] font-bold uppercase px-2 py-0.5 shadow-[2px_2px_0px_0px_#000]" data-translate="tech-canva">Canva</span>
+                        </div>
+                        <button type="button" class="project-btn w-full block text-center border-2 border-black bg-white font-bold uppercase py-2 text-xs shadow-[3px_3px_0px_0px_#000] hover:bg-[#BAFCA2] active:translate-x-1 active:translate-y-1 active:shadow-none transition-all" data-translate="btn-view-details">Lihat Detail</button>
+                    </div>
+                </div>
+
+            </div>
+
+                    <!-- Duplikasi Card Lainnya Sesuai Kebutuhan di Sini dengan Struktur yang Sama -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-16 px-6 border-b-[3px] border-black bg-[#EFECE6]">
+            <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-12 items-start">
+                <div class="space-y-6">
+                    <h2 class="font-heading font-black text-4xl md:text-5xl uppercase tracking-tighter" data-translate="contact-title">Hubungi Saya</h2>
+                    <p class="text-sm font-semibold text-zinc-700" data-translate="contact-description">Saya selalu tertarik dengan proyek-proyek menarik. Mari diskusikan bagaimana kita bisa bekerja sama.</p>
+                    <div class="space-y-3 font-bold text-sm uppercase">
+                        <div class="flex items-center gap-3 border-2 border-black bg-white p-3 shadow-[3px_3px_0px_0px_#000]"><i class="fas fa-envelope text-[#FFA07A]"></i><span>irsyadarafi@gmail.com</span></div>
+                        <div class="flex items-center gap-3 border-2 border-black bg-white p-3 shadow-[3px_3px_0px_0px_#000]"><i class="fas fa-phone text-[#BAFCA2]"></i><span>+62 851 7993 6424</span></div>
+                        <div class="flex items-center gap-3 border-2 border-black bg-white p-3 shadow-[3px_3px_0px_0px_#000]"><i class="fas fa-map-marker-alt text-[#C4A1FF]"></i><span>Bandungan, Jawa Tengah</span></div>
+                    </div>
+                    <!-- Social Links Brutalist Icons -->
+                    <div class="flex gap-4">
+                        <a href="https://github.com/Anantarafi" target="_blank" class="w-12 h-12 flex items-center justify-center border-2 border-black bg-white shadow-[4px_4px_0px_0px_#000] hover:bg-[#FFDB58] transition-all"><i class="fab fa-github text-xl"></i></a>
+                        <a href="https://www.linkedin.com/in/irsyada-rafi-ananta-80635a324" target="_blank" class="w-12 h-12 flex items-center justify-center border-2 border-black bg-white shadow-[4px_4px_0px_0px_#000] hover:bg-[#C4A1FF] transition-all"><i class="fab fa-linkedin text-xl"></i></a>
+                        <a href="https://www.instagram.com/raphanangram/" target="_blank" class="w-12 h-12 flex items-center justify-center border-2 border-black bg-white shadow-[4px_4px_0px_0px_#000] hover:bg-[#FFA07A] transition-all"><i class="fab fa-instagram text-xl"></i></a>
+                    </div>
+                </div>
+
+        <!-- Footer -->
+        <footer class="py-6 border-black bg-white text-center font-bold text-xs uppercase tracking-wider">
+            <p data-translate="footer-text">&copy; 2025 Irsyada Rafi Ananta. All rights reserved.</p>
+        </footer>
+
+    </div>
+
+    <!-- Back to top -->
+    <button id="back-to-top" class="fixed right-8 bottom-8 w-12 h-12 rounded-full border-2 border-black bg-[#FFDB58] text-black flex items-center justify-center shadow-[4px_4px_0px_0px_#000] transition-all opacity-0 invisible z-50"><i class="fas fa-arrow-up"></i></button>
+
+    <script src="translations.js"></script>
+    <script src="script.js"></script>
+</body>
+</body>
+</html>
