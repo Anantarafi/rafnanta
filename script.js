@@ -88,14 +88,39 @@ document.addEventListener('DOMContentLoaded', () => {
     const viewProjectBtn = document.getElementById('view-project');
     let currentProjectLink = '';
 
-    function openModal(card) {
+   function openModal(card) {
         if (!modal) return;
         
         currentProjectLink = card.getAttribute('data-link') || '#';
         const imgSrc = card.querySelector('img')?.src || '';
-        const title = card.querySelector('h3')?.textContent || '';
-        const description = card.querySelector('p')?.textContent || '';
         const category = card.getAttribute('data-category') || '';
+        
+        // --- PERBAIKAN TRANSLASI DINAMIS DI DALAM MODAL ---
+        // Ambil elemen judul dan deskripsi asli dari dalam kartu proyek
+        const cardTitleEl = card.querySelector('h3');
+        const cardDescEl = card.querySelector('p');
+        
+        // Ambil bahasa yang sedang aktif di local storage (default ke 'id')
+        const currentLang = localStorage.getItem('preferred-language') || 'id';
+        
+        let title = '';
+        let description = '';
+
+        // Cek jika elemen memiliki data-translate, ambil teks dari translations.js secara dinamis
+        if (cardTitleEl && cardTitleEl.getAttribute('data-translate')) {
+            const titleKey = cardTitleEl.getAttribute('data-translate');
+            title = (window.translations && window.translations[currentLang]?.[titleKey]) || cardTitleEl.textContent;
+        } else {
+            title = cardTitleEl ? cardTitleEl.textContent : '';
+        }
+
+        if (cardDescEl && cardDescEl.getAttribute('data-translate')) {
+            const descKey = cardDescEl.getAttribute('data-translate');
+            description = (window.translations && window.translations[currentLang]?.[descKey]) || cardDescEl.textContent;
+        } else {
+            description = cardDescEl ? cardDescEl.textContent : '';
+        }
+        // --------------------------------------------------
         
         const modalImage = document.getElementById('modal-image');
         const modalTitle = document.getElementById('modal-title');
